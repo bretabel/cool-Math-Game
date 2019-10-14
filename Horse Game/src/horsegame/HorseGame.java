@@ -19,6 +19,7 @@ public class HorseGame extends PApplet {
 	//Coordinates
 	
 	//Menu Buttons
+	//start button
 	int startX;
 	int startY;
 	int startWidth;
@@ -109,6 +110,13 @@ public class HorseGame extends PApplet {
 			if(mouseX > startX && mouseX < startX + startWidth && mouseY > startY && mouseY < startY + startHeight) {
 				currentState = GameState.RUNNING;
 			}
+			break;
+			
+		case RUNNING:
+			break;
+			
+		case GAMEOVER:
+			break;
 		}
 	}
 	
