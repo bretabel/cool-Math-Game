@@ -18,6 +18,12 @@ public class HorseGame extends PApplet {
 	
 	//Coordinates
 	
+	//Menu Buttons
+	int startX;
+	int startY;
+	int startWidth;
+	int startHeight;
+	
 	//Game State
 	enum GameState {
 		MENU, RUNNING, GAMEOVER
@@ -33,6 +39,8 @@ public class HorseGame extends PApplet {
 		
 		//Initialize Game State
 		currentState = GameState.MENU;
+		
+		//
 	}
 	
 	public void settings() {
@@ -94,6 +102,16 @@ public class HorseGame extends PApplet {
 	private void drawPlayer() {
 		
 	}
+	
+	public void mousePressed() {
+		switch(currentState) {
+		case MENU:
+			if(mouseX > startX && mouseX < startX + startWidth && mouseY > startY && mouseY < startY + startHeight) {
+				currentState = GameState.RUNNING;
+			}
+		}
+	}
+	
 	
 	public static void main(String _args[]) {
 		PApplet.main(new String[] { horsegame.HorseGame.class.getName() });
