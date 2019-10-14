@@ -10,6 +10,9 @@ public class HorseGame extends PApplet {
 	//Instance Variables
 	//TODO: Fill in variables
 	
+	//Fonts
+	PFont menufont;
+	
 	// Images
 	PImage background;
 	
@@ -22,8 +25,18 @@ public class HorseGame extends PApplet {
 	static GameState currentState;
 	
 		
-		
+	/**
+	 * Initialize Variables	
+	 */
 	public void setup() {
+		//fonts
+		
+		//Initialize Game State
+		currentState = GameState.MENU;
+	}
+	
+	public void settings() {
+		size(900,900);
 	}
 
 	/**
@@ -50,8 +63,16 @@ public class HorseGame extends PApplet {
 	 * Method to draw the Menu
 	 */
 	private void drawMenu() {
-		//TODO: Fill in
-	}
+		clear();
+		background(0, 0, 0);
+
+		textAlign(CENTER, CENTER);
+		fill(90, 200, 215); // teal
+		text("Menu", width / 2, height / 2 - 200);
+
+		fill(200);
+		text("start", width / 2, height / 2 - 20);
+		text("credits", width / 2, height / 2 + 20);	}
 	
 	/**
 	 * Method to draw the game while it runs
