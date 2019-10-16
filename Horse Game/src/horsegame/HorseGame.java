@@ -14,22 +14,21 @@ public class HorseGame extends PApplet {
 	PFont menufont;
 	
 	// Images
-	PImage background;
+	PImage gameBG;
 	
 	//Coordinates
+	int boxX, boxY, boxW, boxH;					 // text box for questions 	
 	
-	//Menu Buttons
-	//start button
-	int startX;
-	int startY;
-	int startWidth;
-	int startHeight;
+	int startX, startY, startWidth, startHeight; // start button
 	
 	//Game State
 	enum GameState {
 		MENU, RUNNING, GAMEOVER
 	}
 	static GameState currentState;
+	
+	//Game Assets
+	ProblemSet questions;
 	
 		
 	/**
@@ -41,7 +40,19 @@ public class HorseGame extends PApplet {
 		//Initialize Game State
 		currentState = GameState.MENU;
 		
-		//
+		//Images
+		gameBG = loadImage("Game_Background.png");
+		gameBG.resize(0, 900);
+		
+		//Assets
+		questions = new ProblemSet();
+		
+		//Text Box
+		boxW = width;
+		boxH = 100;
+		boxX = 0;
+		boxY = height - boxH;
+		
 	}
 	
 	public void settings() {
@@ -81,13 +92,27 @@ public class HorseGame extends PApplet {
 
 		fill(200);
 		text("start", width / 2, height / 2 - 20);
-		text("credits", width / 2, height / 2 + 20);	}
+		text("credits", width / 2, height / 2 + 20);	
+		}
 	
 	/**
 	 * Method to draw the game while it runs
 	 */
 	private void drawRunning() {
-		//TODO: Fill in
+		clear();
+		background(gameBG);
+		
+	}
+	
+	public void drawTextBox() {
+		
+	}
+	
+	/**
+	 * Gets a question to query the user
+	 */
+	public void getQuestion() {
+		questions.getFirst();
 	}
 	
 	/**
