@@ -84,6 +84,10 @@ public class HorseGame extends PApplet {
 		butW = 300; 
 		butH = 112;
 		
+		//button coordinates
+		startX = width/2 - butW/2;
+		startY = height/2 - 20;
+		
 		// player coordinates
 		playerX = 100;
 		playerY = 600;
@@ -134,9 +138,7 @@ public class HorseGame extends PApplet {
 		fill(90, 200, 215); // teal
 		text("Menu", width / 2, height / 2 - 200);
 
-		fill(200);
-		text("start", width / 2, height / 2 - 20);
-		text("credits", width / 2, height / 2 + 20);
+		image(startButton, startX, startY);
 		}
 	
 	/**
