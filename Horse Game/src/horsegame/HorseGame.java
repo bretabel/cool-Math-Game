@@ -70,12 +70,12 @@ public class HorseGame extends PApplet {
 		menuButton.resize(300, 0);
 		player = loadImage("Horse.png");
 		
-		//Assets
+		//Math Questions
 		questions = new ProblemSet();
 		
 		//Text Box
 		boxW = width/2;
-		boxH = 100;
+		boxH = 50;
 		boxX = width/4;
 		boxY = height - boxH - 50;
 		textBox = new TextBox(boxX, boxY, boxW, boxH);
