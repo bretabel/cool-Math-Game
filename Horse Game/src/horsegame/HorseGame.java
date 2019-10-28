@@ -86,7 +86,9 @@ public class HorseGame extends PApplet {
 		
 		//button coordinates
 		startX = width/2 - butW/2;
-		startY = height/2 - 20;
+		startY = height/2 - 120;
+		exitX = width/2 - butW/2;
+		exitY = height/2;
 		
 		// player coordinates
 		playerX = 100;
@@ -139,6 +141,7 @@ public class HorseGame extends PApplet {
 		text("Menu", width / 2, height / 2 - 200);
 
 		image(startButton, startX, startY);
+		image(exitButton, exitX, exitY);
 		}
 	
 	/**
@@ -195,10 +198,14 @@ public class HorseGame extends PApplet {
 	public void mousePressed() {
 		switch(currentState) {
 		case MENU:
-			// start button
+			// start buttons
 			if(mouseX > startX && mouseX < startX + butW && mouseY > startY && mouseY < startY + butH) {
 				currentState = GameState.RUNNING;
 			} 
+			// exit button
+			else if(mouseX > exitX && mouseX < exitX + butW && mouseY > exitY && mouseY < exitY + butH) {
+				System.exit(0); //donezo
+			}
 			// credits button
 			else if(mouseX > credX && mouseX < credX + butW && mouseY > credY && mouseY < credY + butH) {
 				currentState = GameState.RUNNING;
