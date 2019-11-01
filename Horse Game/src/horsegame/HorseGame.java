@@ -56,7 +56,7 @@ public class HorseGame extends PApplet {
 
 		// Images
 		gameBG = loadImage("Game_Background.png");
-		gameBG.resize(0, 900);
+		gameBG.resize(1125, 650);
 		exitButton = loadImage("Exit_Button.png");
 		exitButton.resize(300, 0);
 		creditsButton = loadImage("Credits_Button.png");
@@ -76,7 +76,7 @@ public class HorseGame extends PApplet {
 		boxW = width / 2;
 		boxH = 100;
 		boxX = width / 4;
-		boxY = height - boxH - 50;
+		boxY = height - boxH - 10;
 		textBox = new TextBox(boxX, boxY, boxW, boxH);
 
 		// Buttons (based on the pixel dimensions of the image file)
@@ -95,12 +95,12 @@ public class HorseGame extends PApplet {
 
 		// player coordinates
 		playerX = 100;
-		playerY = 600;
+		playerY = 450;
 
 	}
 
 	public void settings() {
-		size(1125, 900);
+		size(1125, 650); //Started as 1125 900
 	}
 
 ////////////////////////////////////////////////////////////
