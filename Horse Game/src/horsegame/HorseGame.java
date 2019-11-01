@@ -139,8 +139,9 @@ public class HorseGame extends PApplet {
 		background(0, 0, 0);
 
 		textAlign(CENTER, CENTER);
-		fill(90, 200, 215); // teal
-		text("Menu", width / 2, height / 2 - 200);
+		textSize(45);
+		fill(255, 255, 255); // white
+		text("Stable Algorithms", width / 2, height / 2 - 200);
 
 		image(startButton, startX, startY);
 		image(creditsButton, credX, credY);
@@ -172,9 +173,17 @@ public class HorseGame extends PApplet {
 		background(0, 0, 0);
 
 		textAlign(CENTER, CENTER);
-		textSize(32);
-		fill(100, 100, 100); // white
+		textSize(45);
+		fill(255, 255, 255); // white
 		text("Credits", width / 2, height / 2 - 200);
+		textSize(32);
+		text("Developed by:", width / 2, height / 2 - 150);
+		text("Bret", width / 2, height / 2 - 100);
+		text("Kyle", width / 2, height / 2 - 50);
+		text("Ellis", width / 2, height / 2 );
+		text("Darian", width / 2, height / 2 + 50);
+
+
 	}
 
 	/**
@@ -212,7 +221,7 @@ public class HorseGame extends PApplet {
 			}
 			// credits button
 			else if (mouseX > credX && mouseX < credX + butW && mouseY > credY && mouseY < credY + butH) {
-				currentState = GameState.GAMEOVER;
+				currentState = GameState.GAMEOVER; //Only way to get to GAMEOVER b/c no progression in RUNNING yet
 			}
 			// exit button
 			else if (mouseX > exitX && mouseX < exitX + butW && mouseY > exitY && mouseY < exitY + butH) {
@@ -341,7 +350,7 @@ public class HorseGame extends PApplet {
 		}
 
 		private void addText(char text) {
-			// IF THE TEXT WIDHT IS IN BOUNDARIES OF THE TEXTBOX
+			// IF THE TEXT WIDTH IS IN BOUNDARIES OF THE TEXTBOX
 			if (textWidth(Text + text) < W) {
 				Text += text;
 				TextLength++;
