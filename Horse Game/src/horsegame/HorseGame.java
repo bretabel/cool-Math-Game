@@ -78,6 +78,7 @@ public class HorseGame extends PApplet {
 		boxH = 100;
 		boxX = width / 4;
 		boxY = height - boxH - 10;
+		textBox = new TextBox(boxX, boxY, boxW, boxH);
 		
 		//Buttons (based on the pixel dimensions of the image file)
 		butW = 300; 
