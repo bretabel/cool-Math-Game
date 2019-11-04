@@ -266,7 +266,7 @@ public class HorseGame extends PApplet {
 ////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 * @author Bret Abel based on code by Mitko Nikov
 	 *
 	 */
