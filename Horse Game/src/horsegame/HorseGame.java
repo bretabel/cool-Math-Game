@@ -74,7 +74,7 @@ public class HorseGame extends PApplet {
 
 		// Text Box
 		boxW = width / 2;
-		boxH = 100;
+		boxH = 50;
 		boxX = width / 4;
 		boxY = height - boxH - 10;
 		textBox = new TextBox(boxX, boxY, boxW, boxH);
@@ -257,7 +257,7 @@ public class HorseGame extends PApplet {
 	/**
 	 * Main Method
 	 */
-	public static void main(String _args[]) {
+	public static void main(String args[]) {
 		PApplet.main(new String[] { horsegame.HorseGame.class.getName() });
 	}
 
