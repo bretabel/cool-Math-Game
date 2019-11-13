@@ -76,7 +76,7 @@ public class HorseGame extends PApplet {
 		boxW = width / 2;
 		boxH = 50;
 		boxX = width / 4;
-		boxY = height - boxH - 10;
+		boxY = height - boxH - 20;
 		textBox = new TextBox(boxX, boxY, boxW, boxH);
 
 		// Buttons (based on the pixel dimensions of the image file)
@@ -156,6 +156,7 @@ public class HorseGame extends PApplet {
 		background(gameBG);
 		drawPlayer();
 		drawTextBox();
+		drawQuestions();
 
 	}
 
@@ -196,6 +197,17 @@ public class HorseGame extends PApplet {
 
 	private void drawTextBox() {
 		textBox.draw();
+	}
+	
+	/**
+	 * Method to draw the questions to the screen
+	 */
+	private void drawQuestions() {
+		//Expression q = questions.getFirst();
+		String qString = "Test";
+		fill(140); // same shade of grey as the text box
+		text(qString, boxX, boxY - 20);
+	
 	}
 
 ///////////////////////////////////////////////////////////
