@@ -209,6 +209,7 @@ public class HorseGame extends PApplet {
 		text(qString, boxX, boxY - 20);
 	
 	}
+	
 
 ///////////////////////////////////////////////////////////
 //////    EVENT HANDLING METHODS //////////////////////////
@@ -352,7 +353,7 @@ public class HorseGame extends PApplet {
 					boolean isKeySmallLetter = (KEY >= 'a' && KEY <= 'z');
 					boolean isKeyNumber = (KEY >= '0' && KEY <= '9');
 
-					if (isKeyCapitalLetter || isKeySmallLetter || isKeyNumber) {
+					if (isKeyNumber) {
 						addText(KEY);
 					}
 				}
