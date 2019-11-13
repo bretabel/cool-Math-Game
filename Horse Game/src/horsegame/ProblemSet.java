@@ -1,5 +1,3 @@
-package horsegame;
-
 import java.util.*;
 
 
@@ -53,7 +51,7 @@ public class ProblemSet {
 	
 	public Expression getFirst() {
 		Expression e = problemList.get(0);
-		problemList.remove(0);
+		// problemList.remove(0);
 		return e;
 	}
 	

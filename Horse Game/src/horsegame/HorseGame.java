@@ -74,9 +74,9 @@ public class HorseGame extends PApplet {
 
 		// Text Box
 		boxW = width / 2;
-		boxH = 100;
+		boxH = 50;
 		boxX = width / 4;
-		boxY = height - boxH - 10;
+		boxY = height - boxH - 20;
 		textBox = new TextBox(boxX, boxY, boxW, boxH);
 
 		// Buttons (based on the pixel dimensions of the image file)
@@ -156,6 +156,7 @@ public class HorseGame extends PApplet {
 		background(gameBG);
 		drawPlayer();
 		drawTextBox();
+		drawQuestions();
 
 	}
 
@@ -197,6 +198,18 @@ public class HorseGame extends PApplet {
 	private void drawTextBox() {
 		textBox.draw();
 	}
+	
+	/**
+	 * Method to draw the questions to the screen
+	 */
+	private void drawQuestions() {
+		//Expression q = questions.getFirst();
+		String qString = "Test";
+		fill(140); // same shade of grey as the text box
+		text(qString, boxX, boxY - 20);
+	
+	}
+	
 
 ///////////////////////////////////////////////////////////
 //////    EVENT HANDLING METHODS //////////////////////////
@@ -257,7 +270,7 @@ public class HorseGame extends PApplet {
 	/**
 	 * Main Method
 	 */
-	public static void main(String _args[]) {
+	public static void main(String args[]) {
 		PApplet.main(new String[] { horsegame.HorseGame.class.getName() });
 	}
 
@@ -266,7 +279,7 @@ public class HorseGame extends PApplet {
 ////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 * @author Bret Abel based on code by Mitko Nikov
 	 *
 	 */
@@ -340,7 +353,7 @@ public class HorseGame extends PApplet {
 					boolean isKeySmallLetter = (KEY >= 'a' && KEY <= 'z');
 					boolean isKeyNumber = (KEY >= '0' && KEY <= '9');
 
-					if (isKeyCapitalLetter || isKeySmallLetter || isKeyNumber) {
+					if (isKeyNumber) {
 						addText(KEY);
 					}
 				}
