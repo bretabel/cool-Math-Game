@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Horse Game/src"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/core.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/gluegen-rt-natives-linux-aarch64.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/gluegen-rt-natives-linux-amd64.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/gluegen-rt-natives-linux-armv6hf.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/gluegen-rt-natives-linux-i586.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/gluegen-rt-natives-macosx-universal.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/gluegen-rt-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/gluegen-rt-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/jogl-all-natives-linux-aarch64.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/jogl-all-natives-linux-amd64.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/jogl-all-natives-linux-armv6hf.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/jogl-all-natives-linux-i586.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/jogl-all-natives-macosx-universal.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/jogl-all-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/jogl-all-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/core/jogl-all.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/dxf/dxf.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/net/net.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/pdf/itext.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/pdf/pdf.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/serial/jssc.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/serial/serial.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/svg/batik-awt-util-1.8.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/svg/batik-dom-1.8.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/svg/batik-ext-1.8.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/svg/batik-svggen-1.8.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/svg/batik-util-1.8.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/svg/batik-xml-1.8.jar"/>
+	<classpathentry kind="lib" path="Horse Game/lib/base/svg/svg.jar"/>
+	<classpathentry kind="output" path="Horse Game/bin"/>
+</classpath>
