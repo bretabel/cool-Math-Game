@@ -223,11 +223,26 @@ public class HorseGame extends PApplet {
 	 * Method to draw the questions to the screen
 	 */
 	private void drawQuestions() {
-		//Expression q = questions.getFirst();
-		String qString = "Test";
+		Expression q = questions.getFirst();
+		String qString = q.toString();
 		fill(140); // same shade of grey as the text box
 		text(qString, boxX, boxY - 20);
+		if (questionAnswered(q)) {
+			// TODO: Increase score
+			// TODO: Move horse
+			questions.problemList.remove(0);
+		}
 	
+	}
+	
+	private boolean questionAnswered(Expression q) {
+		int input = -1;
+		if(!(textBox.Text.equals(""))) {
+			input = Integer.parseInt(textBox.Text);
+		}
+		if(q.isSolution(input)) {
+			return true;
+		} else return false;
 	}
 	
 
