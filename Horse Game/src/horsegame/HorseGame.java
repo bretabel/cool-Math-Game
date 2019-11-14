@@ -20,6 +20,8 @@ public class HorseGame extends PApplet {
 	PImage restartButton;
 	PImage menuButton;
 	PImage player;
+	PImage[] sprites = new PImage[8];
+	int animationFrame = 1;
 
 	// Coordinates
 	int boxX, boxY; 		// text box for questions
@@ -29,7 +31,7 @@ public class HorseGame extends PApplet {
 	int restartX, restartY; // restart button
 	int menuX, menuY; 		// menu button
 	int playerX, playerY; 	// player sprite
-	int scoreX, scoreY;		// score 
+	int scoreX, scoreY;		// score
 
 	// Dimensions
 	int boxW, boxH; 		// text box width and height
@@ -70,7 +72,19 @@ public class HorseGame extends PApplet {
 		restartButton.resize(300, 0);
 		menuButton = loadImage("MainMenu_Button.png");
 		menuButton.resize(300, 0);
-		player = loadImage("Horse.png");
+		player = loadImage("Frame1.png");
+		player.resize(200, 0);
+		sprites[0] = loadImage("Frame1.png");
+		sprites[1] = loadImage("Frame2.png");
+		sprites[2] = loadImage("Frame3.png");
+		sprites[3] = loadImage("Frame4.png");
+		sprites[4] = loadImage("Frame5.png");
+		sprites[5] = loadImage("Frame6.png");
+		sprites[6] = loadImage("Frame7.png");
+		sprites[7] = loadImage("Frame8.png");
+		for (int i = 0; i < sprites.length; i++) {
+			sprites[i].resize(200, 0);
+		}
 
 		// Assets
 		questions = new ProblemSet();
@@ -124,6 +138,12 @@ public class HorseGame extends PApplet {
 			break;
 
 		case RUNNING:
+			int startTime = millis();
+			int timer = (millis() - startTime) / 1000;
+			if (frameCount % 8 == 0) {
+				animationFrame++;
+				animationFrame = animationFrame % sprites.length;
+			}
 			drawRunning();
 			break;
 
@@ -209,9 +229,9 @@ public class HorseGame extends PApplet {
 	 */
 	private void drawPlayer() {
 		imageMode(CENTER);
-		image(player, playerX, playerY);
+		image(sprites[animationFrame], playerX, playerY);
 	}
-	
+
 	private void drawScore() {
 		textAlign(CENTER, CENTER);
 		fill(255, 255, 255); // white
@@ -221,7 +241,7 @@ public class HorseGame extends PApplet {
 	private void drawTextBox() {
 		textBox.draw();
 	}
-	
+
 	/**
 	 * Method to draw the questions to the screen
 	 */
@@ -241,14 +261,14 @@ public class HorseGame extends PApplet {
 			playerX += width/ (MAX_SCORE + 2);		// moves the player sprite across the screen
 			questions.problemList.remove(0);
 		}
-	
+
 	}
-	
+
 
 ///////////////////////////////////////////////////////////
 //////    EVENT HANDLING METHODS //////////////////////////
 ///////////////////////////////////////////////////////////
-	
+
 	/**
 	 * A method to check the player's answer against the solution
 	 * @param q The question
@@ -386,8 +406,8 @@ public class HorseGame extends PApplet {
 		}
 
 		/**
-		 * Handles key press events. This version only permits numbers, backspace, 
-		 * and the enter key. 
+		 * Handles key press events. This version only permits numbers, backspace,
+		 * and the enter key.
 		 * @param KEY The key that is pressed
 		 * @param KEYCODE The particular int mapped to a physical key
 		 * @return
@@ -447,7 +467,7 @@ public class HorseGame extends PApplet {
 				selected = false;
 			}
 		}
-		
+
 		private boolean isEmpty() {
 			if(this.Text.equals("")) {
 				return true;
