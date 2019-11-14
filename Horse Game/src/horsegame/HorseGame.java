@@ -303,7 +303,7 @@ public class HorseGame extends PApplet {
 			}
 			// credits button
 			else if (mouseX > credX && mouseX < credX + butW && mouseY > credY && mouseY < credY + butH) {
-				currentState = GameState.GAMEOVER; //Only way to get to GAMEOVER b/c no progression in RUNNING yet
+				currentState = GameState.CREDITS; 
 			}
 			// exit button
 			else if (mouseX > exitX && mouseX < exitX + butW && mouseY > exitY && mouseY < exitY + butH) {
