@@ -7,7 +7,7 @@ import processing.core.PFont;
 public class HorseGame extends PApplet {
 
 	// Instance Variables
-	// TODO: Fill in variables
+
 
 	// Fonts
 	PFont menufont;
