@@ -1,3 +1,5 @@
+package horsegame;
+
 import java.util.*;
 
 

@@ -7,7 +7,7 @@ import processing.core.PFont;
 public class HorseGame extends PApplet {
 
 	// Instance Variables
-	// TODO: Fill in variables
+
 
 	// Fonts
 	PFont menufont;
@@ -20,6 +20,8 @@ public class HorseGame extends PApplet {
 	PImage restartButton;
 	PImage menuButton;
 	PImage player;
+	PImage[] sprites = new PImage[8]; 
+	int animationFrame = 1;
 
 	// Coordinates
 	int boxX, boxY; 		// text box for questions
@@ -67,7 +69,19 @@ public class HorseGame extends PApplet {
 		restartButton.resize(300, 0);
 		menuButton = loadImage("MainMenu_Button.png");
 		menuButton.resize(300, 0);
-		player = loadImage("Horse.png");
+		player = loadImage("Frame1.png");
+		player.resize(200, 0);
+		sprites[0] = loadImage("Frame1.png");
+		sprites[1] = loadImage("Frame2.png");
+		sprites[2] = loadImage("Frame3.png");
+		sprites[3] = loadImage("Frame4.png");
+		sprites[4] = loadImage("Frame5.png");
+		sprites[5] = loadImage("Frame6.png");
+		sprites[6] = loadImage("Frame7.png");
+		sprites[7] = loadImage("Frame8.png");
+		for (int i = 0; i < sprites.length; i++) {
+			sprites[i].resize(200, 0);
+		}
 
 		// Assets
 		questions = new ProblemSet();
@@ -118,6 +132,12 @@ public class HorseGame extends PApplet {
 			break;
 
 		case RUNNING:
+			int startTime = millis();
+			int timer = (millis() - startTime) / 1000;
+			if (frameCount % 8 == 0) {
+				animationFrame++;
+				animationFrame = animationFrame % sprites.length;
+			}
 			drawRunning();
 			break;
 
@@ -192,7 +212,7 @@ public class HorseGame extends PApplet {
 	 */
 	private void drawPlayer() {
 		imageMode(CENTER);
-		image(player, playerX, playerY);
+		image(sprites[animationFrame], playerX, playerY);
 	}
 
 	private void drawTextBox() {
