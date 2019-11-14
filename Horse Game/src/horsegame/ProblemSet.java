@@ -51,7 +51,9 @@ public class ProblemSet {
 	
 	public Expression getFirst() {
 		Expression e = problemList.get(0);
+
 		// problemList.remove(0);
+
 		return e;
 	}
 	
@@ -59,7 +61,7 @@ public class ProblemSet {
 		Random rng = new Random(); 
 		int randomIndex = rng.nextInt(problemList.size());
 		Expression e = problemList.get(randomIndex);
-		problemList.remove(randomIndex);
+		//problemList.remove(randomIndex);
 		return e;
 	}
 	
