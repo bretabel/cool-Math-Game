@@ -7,7 +7,7 @@ import processing.core.PFont;
 public class HorseGame extends PApplet {
 
 	// Instance Variables
-
+	// TODO: Fill in variables as needed
 
 	// Fonts
 	PFont menufont;
@@ -20,7 +20,7 @@ public class HorseGame extends PApplet {
 	PImage restartButton;
 	PImage menuButton;
 	PImage player;
-	PImage[] sprites = new PImage[8]; 
+	PImage[] sprites = new PImage[8];
 	int animationFrame = 1;
 
 	// Coordinates
@@ -30,11 +30,12 @@ public class HorseGame extends PApplet {
 	int credX, credY; 		// credits button
 	int restartX, restartY; // restart button
 	int menuX, menuY; 		// menu button
-	int playerX, playerY; 	// Horse coordinates
+	int playerX, playerY; 	// player sprite
+	int scoreX, scoreY;		// score
 
 	// Dimensions
-	int boxW, boxH; // text box width and height
-	int butW, butH; // button width and height
+	int boxW, boxH; 		// text box width and height
+	int butW, butH; 		// button width and height
 
 	// Game State
 	enum GameState {
@@ -46,6 +47,8 @@ public class HorseGame extends PApplet {
 	// Game Assets
 	ProblemSet questions;
 	TextBox textBox;
+	int score;
+	final int MAX_SCORE = 10;
 
 	/**
 	 * Initialize Variables
@@ -85,6 +88,7 @@ public class HorseGame extends PApplet {
 
 		// Assets
 		questions = new ProblemSet();
+		score = 0;
 
 		// Text Box
 		boxW = width / 2;
@@ -97,7 +101,7 @@ public class HorseGame extends PApplet {
 		butW = 300;
 		butH = 112;
 
-		// button coordinates
+		// Coordinates
 		startX = width / 2 - butW / 2;
 		startY = height / 2 - 120;
 		restartX = width / 2 - butW / 2;
@@ -106,6 +110,8 @@ public class HorseGame extends PApplet {
 		credY = height / 2;
 		exitX = width / 2 - butW / 2;
 		exitY = height / 2 + 120;
+		scoreX = 125;
+		scoreY = height - 75;
 
 		// player coordinates
 		playerX = 100;
@@ -172,11 +178,15 @@ public class HorseGame extends PApplet {
 	 * Method to draw the game while it runs
 	 */
 	private void drawRunning() {
+		if (score == MAX_SCORE) {
+			currentState = GameState.GAMEOVER;
+		}
 		clear();
 		background(gameBG);
 		drawPlayer();
 		drawTextBox();
 		drawQuestions();
+		drawScore();
 
 	}
 
@@ -184,9 +194,18 @@ public class HorseGame extends PApplet {
 	 * Method to draw the Game Over window.
 	 */
 	private void drawGameOver() {
+		clear();
+		background(0, 0, 0);
+		imageMode(CORNER);
 		image(restartButton, restartX, restartY);
 		image(creditsButton, credX, credY);
 		image(exitButton, exitX, exitY);
+		textAlign(CENTER, CENTER);
+		textSize(45);
+		fill(255, 255, 255); // white
+		text("Game Over!", width / 2, height / 2 - 200);
+		textSize(32);
+		text("Your Score: " + score, width / 2, height / 2 - 150);
 	}
 
 	private void drawCredits() {
@@ -203,8 +222,6 @@ public class HorseGame extends PApplet {
 		text("Kyle", width / 2, height / 2 - 50);
 		text("Ellis", width / 2, height / 2 );
 		text("Darian", width / 2, height / 2 + 50);
-
-
 	}
 
 	/**
@@ -215,40 +232,57 @@ public class HorseGame extends PApplet {
 		image(sprites[animationFrame], playerX, playerY);
 	}
 
+	private void drawScore() {
+		textAlign(CENTER, CENTER);
+		fill(255, 255, 255); // white
+		text(("Score:\n" + score), scoreX, scoreY);
+	}
+
 	private void drawTextBox() {
 		textBox.draw();
 	}
-	
+
 	/**
 	 * Method to draw the questions to the screen
 	 */
 	private void drawQuestions() {
-		Expression q = questions.getFirst();
+		Expression q;
+		if (questions.problemList.size() >= 1) {
+			 q = questions.getFirst();
+		} else {
+			q = new Expression();
+			questions.addExpression(q);				// this should never happen
+		}
 		String qString = q.toString();
-		fill(140); // same shade of grey as the text box
+		fill(140);									// same shade of grey as the text box
 		text(qString, boxX, boxY - 20);
 		if (questionAnswered(q)) {
-			// TODO: Increase score
-			// TODO: Move horse
+			score++;
+			playerX += width/ (MAX_SCORE + 2);		// moves the player sprite across the screen
 			questions.problemList.remove(0);
 		}
-	
+
 	}
-	
+
+
+///////////////////////////////////////////////////////////
+//////    EVENT HANDLING METHODS //////////////////////////
+///////////////////////////////////////////////////////////
+
+	/**
+	 * A method to check the player's answer against the solution
+	 * @param q The question
+	 * @return True if correct, otherwise false
+	 */
 	private boolean questionAnswered(Expression q) {
-		int input = -1;
-		if(!(textBox.Text.equals(""))) {
+		int input = -100;				// placeholder value
+		if(!(textBox.isEmpty())) {
 			input = Integer.parseInt(textBox.Text);
 		}
 		if(q.isSolution(input)) {
 			return true;
 		} else return false;
 	}
-	
-
-///////////////////////////////////////////////////////////
-//////    EVENT HANDLING METHODS //////////////////////////
-///////////////////////////////////////////////////////////
 
 	/**
 	 * Uses the default PApplet keyPressed() method as a wrapper for the text box.
@@ -269,7 +303,7 @@ public class HorseGame extends PApplet {
 			}
 			// credits button
 			else if (mouseX > credX && mouseX < credX + butW && mouseY > credY && mouseY < credY + butH) {
-				currentState = GameState.GAMEOVER; //Only way to get to GAMEOVER b/c no progression in RUNNING yet
+				currentState = GameState.CREDITS; 
 			}
 			// exit button
 			else if (mouseX > exitX && mouseX < exitX + butW && mouseY > exitY && mouseY < exitY + butH) {
@@ -303,7 +337,7 @@ public class HorseGame extends PApplet {
 	}
 
 	/**
-	 * Main Method
+	 * Main Method, calls the PApplet main method to run game.
 	 */
 	public static void main(String args[]) {
 		PApplet.main(new String[] { horsegame.HorseGame.class.getName() });
@@ -314,7 +348,7 @@ public class HorseGame extends PApplet {
 ////////////////////////////////////////////////////////////////////
 
 	/**
-	 *
+	 * A text box object that can get and read input from the user as the game runs.
 	 * @author Bret Abel based on code by Mitko Nikov
 	 *
 	 */
@@ -337,7 +371,7 @@ public class HorseGame extends PApplet {
 		private boolean selected = false;
 
 		TextBox() {
-			// CREATE OBJECT DEFAULT TEXTBOX
+			// default constructor
 		}
 
 		TextBox(int x, int y, int w, int h) {
@@ -371,24 +405,26 @@ public class HorseGame extends PApplet {
 			text(Text, X + (textWidth("a") / 2), Y + TEXTSIZE);
 		}
 
-		// IF THE KEYCODE IS ENTER RETURN 1
-		// ELSE RETURN 0
+		/**
+		 * Handles key press events. This version only permits numbers, backspace,
+		 * and the enter key.
+		 * @param KEY The key that is pressed
+		 * @param KEYCODE The particular int mapped to a physical key
+		 * @return
+		 */
 		boolean keyPressed(char KEY, int KEYCODE) {
 			if (selected) {
 				if (KEYCODE == (int) BACKSPACE) {
 					BACKSPACE();
-				} else if (KEYCODE == 32) {
-					// SPACE
-					addText(' ');
 				} else if (KEYCODE == (int) ENTER) {
 					return true;
 				} else {
-					// CHECK IF THE KEY IS A LETTER OR A NUMBER
-					boolean isKeyCapitalLetter = (KEY >= 'A' && KEY <= 'Z');
-					boolean isKeySmallLetter = (KEY >= 'a' && KEY <= 'z');
-					boolean isKeyNumber = (KEY >= '0' && KEY <= '9');
+					// Checks what type key is pressed
+					// boolean isUppercase = (KEY >= 'A' && KEY <= 'Z');
+					// boolean isLowercase = (KEY >= 'a' && KEY <= 'z');
+					boolean isNumber = (KEY >= '0' && KEY <= '9');
 
-					if (isKeyNumber) {
+					if (isNumber) {
 						addText(KEY);
 					}
 				}
@@ -412,8 +448,7 @@ public class HorseGame extends PApplet {
 			}
 		}
 
-		// FUNCTION FOR TESTING IS THE POINT
-		// OVER THE TEXTBOX
+		// Detects mouse over text box
 		private boolean overBox(int x, int y) {
 			if (x >= X && x <= X + W) {
 				if (y >= Y && y <= Y + H) {
@@ -424,12 +459,19 @@ public class HorseGame extends PApplet {
 			return false;
 		}
 
+		// detects click on text box
 		void pressed(int x, int y) {
 			if (overBox(x, y)) {
 				selected = true;
 			} else {
 				selected = false;
 			}
+		}
+
+		private boolean isEmpty() {
+			if(this.Text.equals("")) {
+				return true;
+			} else return false;
 		}
 	}
 }
