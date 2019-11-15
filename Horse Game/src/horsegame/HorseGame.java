@@ -341,6 +341,7 @@ public class HorseGame extends PApplet {
 	 */
 	public static void main(String args[]) {
 		PApplet.main(new String[] { horsegame.HorseGame.class.getName() });
+		Login.main(args);
 	}
 
 ////////////////////////////////////////////////////////////////////
