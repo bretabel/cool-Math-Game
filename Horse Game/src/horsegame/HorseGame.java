@@ -348,6 +348,7 @@ public class HorseGame extends PApplet {
 	 * Main Method, calls the PApplet main method to run game.
 	 */
 	public static void main(String args[]) {
+		//Login.main(args);
 		PApplet.main(new String[] { horsegame.HorseGame.class.getName() });
 	}
 
