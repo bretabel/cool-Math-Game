@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /.DS_Store
 /Credits_BG.png
 /Credits_Button.png
@@ -18,3 +19,9 @@
 /StartOver_Button.png
 /Start_Button.png
 /horsegame/
+=======
+/horsegame/
+/Credits_BG.png
+/GameOverMenu_BG.png
+/MainMenu_BG.png
+>>>>>>> Stashed changes

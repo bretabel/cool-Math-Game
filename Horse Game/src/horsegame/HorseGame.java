@@ -33,6 +33,7 @@ public class HorseGame extends PApplet {
 	int credX, credY; 		// credits button
 	int restartX, restartY; // restart button
 	int menuX, menuY; 		// menu button
+	final int PLAYER_X = 100;
 	int playerX, playerY; 	// player sprite
 	int scoreX, scoreY;		// score
 
@@ -88,7 +89,7 @@ public class HorseGame extends PApplet {
 		for (int i = 0; i < sprites.length; i++) {
 			sprites[i].resize(200, 0);
 		}
-		startMenuBG = loadImage("MainMenu_BG.png"); 
+		startMenuBG = loadImage("MainMenu_BG.png");
 		startMenuBG.resize(1125,  650);
 		gameOverBG = loadImage("GameOverMenu_BG.png");
 		gameOverBG.resize(1125, 650);
@@ -123,8 +124,8 @@ public class HorseGame extends PApplet {
 		scoreY = height - 75;
 
 		// player coordinates
-		playerX = 100;
-		playerY = 430;
+		playerX = PLAYER_X;
+		playerY = 450;
 
 	}
 
@@ -230,6 +231,7 @@ public class HorseGame extends PApplet {
 		text("Kyle", width / 2, height / 2 - 50);
 		text("Ellis", width / 2, height / 2 );
 		text("Darian", width / 2, height / 2 + 50);
+		text("Dominic", width / 2, height / 2 + 100);
 	}
 
 	/**
@@ -284,10 +286,10 @@ public class HorseGame extends PApplet {
 	 */
 	private boolean questionAnswered(Expression q) {
 		int input = -100;				// placeholder value
-		if(!(textBox.isEmpty())) {
+		if(!(textBox.isEmpty()) && textBox.Text.length() < 4) {
 			input = Integer.parseInt(textBox.Text);
 		}
-		if(q.isSolution(input)) {
+		if(key == ENTER && q.isSolution(input)) {
 			return true;
 		} else return false;
 	}
@@ -311,7 +313,7 @@ public class HorseGame extends PApplet {
 			}
 			// credits button
 			else if (mouseX > credX && mouseX < credX + butW && mouseY > credY && mouseY < credY + butH) {
-				currentState = GameState.CREDITS; 
+				currentState = GameState.CREDITS;
 			}
 			// exit button
 			else if (mouseX > exitX && mouseX < exitX + butW && mouseY > exitY && mouseY < exitY + butH) {
@@ -326,6 +328,8 @@ public class HorseGame extends PApplet {
 		case GAMEOVER:
 			// restart button
 			if (mouseX > restartX && mouseX < restartX + butW && mouseY > startY && mouseY < restartY + butH) {
+				score = 0;
+				playerX = PLAYER_X;
 				currentState = GameState.RUNNING;
 			}
 			// credits button
