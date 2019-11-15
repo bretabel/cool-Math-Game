@@ -143,7 +143,7 @@ public class HorseGame extends PApplet {
 		case RUNNING:
 			int startTime = millis();
 			int timer = (millis() - startTime) / 1000;
-			if (frameCount % 8 == 0) {
+			if (frameCount % 6 == 0) {
 				animationFrame++;
 				animationFrame = animationFrame % sprites.length;
 			}
