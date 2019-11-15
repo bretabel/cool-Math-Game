@@ -35,6 +35,7 @@ public class Login extends JFrame implements ActionListener{
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					System.out.print("Issue with generation of JFrame");
 				}
 			}
 		});
