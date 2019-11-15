@@ -7,13 +7,15 @@
  * @author Bret Abel
  *
  */
-public class Game {
+import java.applet.Applet;
+public class Game extends Applet {
 
 	/**
 	 * 
 	 */
 	public Game() {
 		// TODO Auto-generated constructor stub
+		
 	}
 
 }

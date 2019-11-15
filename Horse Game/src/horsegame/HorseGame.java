@@ -5,7 +5,7 @@ import processing.core.PImage;
 import processing.core.PFont;
 
 
-public class HorseGame extends PApplet {
+public class HorseGame extends PApplet{
 
 	//Instance Variables
 	//TODO: Fill in variables
