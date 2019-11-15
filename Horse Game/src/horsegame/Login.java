@@ -87,8 +87,8 @@ public class Login extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		System.out.print("This button has been clicked");
-
-			
+		setVisible(false);
+		PApplet.main(new String[] { horsegame.HorseGame.class.getName() });
 		}
 		
 	}
