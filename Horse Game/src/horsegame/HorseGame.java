@@ -14,6 +14,9 @@ public class HorseGame extends PApplet {
 
 	// Images
 	PImage gameBG;
+	PImage startMenuBG;
+	PImage gameOverBG;
+	PImage creditsBG;
 	PImage exitButton;
 	PImage creditsButton;
 	PImage startButton;
@@ -86,6 +89,12 @@ public class HorseGame extends PApplet {
 		for (int i = 0; i < sprites.length; i++) {
 			sprites[i].resize(200, 0);
 		}
+		startMenuBG = loadImage("MainMenu_BG.png");
+		startMenuBG.resize(1125,  650);
+		gameOverBG = loadImage("GameOverMenu_BG.png");
+		gameOverBG.resize(1125, 650);
+		creditsBG = loadImage("Credits_BG.png");
+		creditsBG.resize(1125, 650);
 
 		// Assets
 		questions = new ProblemSet();
@@ -141,7 +150,7 @@ public class HorseGame extends PApplet {
 		case RUNNING:
 			int startTime = millis();
 			int timer = (millis() - startTime) / 1000;
-			if (frameCount % 8 == 0) {
+			if (frameCount % 6 == 0) {
 				animationFrame++;
 				animationFrame = animationFrame % sprites.length;
 			}
@@ -163,12 +172,11 @@ public class HorseGame extends PApplet {
 	 */
 	private void drawMenu() {
 		clear();
-		background(0, 0, 0);
+		background(startMenuBG);
 
 		textAlign(CENTER, CENTER);
 		textSize(45);
 		fill(255, 255, 255); // white
-		text("Stable Algorithms", width / 2, height / 2 - 200);
 
 		image(startButton, startX, startY);
 		image(creditsButton, credX, credY);
@@ -196,7 +204,7 @@ public class HorseGame extends PApplet {
 	 */
 	private void drawGameOver() {
 		clear();
-		background(0, 0, 0);
+		background(gameOverBG);
 		imageMode(CORNER);
 		image(restartButton, restartX, restartY);
 		image(creditsButton, credX, credY);
@@ -211,7 +219,7 @@ public class HorseGame extends PApplet {
 
 	private void drawCredits() {
 		clear();
-		background(0, 0, 0);
+		background(creditsBG);
 
 		textAlign(CENTER, CENTER);
 		textSize(45);
@@ -305,7 +313,7 @@ public class HorseGame extends PApplet {
 			}
 			// credits button
 			else if (mouseX > credX && mouseX < credX + butW && mouseY > credY && mouseY < credY + butH) {
-				currentState = GameState.CREDITS; 
+				currentState = GameState.CREDITS;
 			}
 			// exit button
 			else if (mouseX > exitX && mouseX < exitX + butW && mouseY > exitY && mouseY < exitY + butH) {
@@ -344,6 +352,7 @@ public class HorseGame extends PApplet {
 	 * Main Method, calls the PApplet main method to run game.
 	 */
 	public static void main(String args[]) {
+		//Login.main(args);
 		PApplet.main(new String[] { horsegame.HorseGame.class.getName() });
 	}
 
