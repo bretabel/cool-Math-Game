@@ -222,6 +222,7 @@ public class HorseGame extends PApplet {
 		text("Kyle", width / 2, height / 2 - 50);
 		text("Ellis", width / 2, height / 2 );
 		text("Darian", width / 2, height / 2 + 50);
+		text("Dominic", width / 2, height / 2 + 100);
 	}
 
 	/**
