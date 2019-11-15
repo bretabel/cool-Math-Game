@@ -30,6 +30,7 @@ public class HorseGame extends PApplet {
 	int credX, credY; 		// credits button
 	int restartX, restartY; // restart button
 	int menuX, menuY; 		// menu button
+	final int PLAYER_X = 100;
 	int playerX, playerY; 	// player sprite
 	int scoreX, scoreY;		// score
 
@@ -114,7 +115,7 @@ public class HorseGame extends PApplet {
 		scoreY = height - 75;
 
 		// player coordinates
-		playerX = 100;
+		playerX = PLAYER_X;
 		playerY = 450;
 
 	}
@@ -277,10 +278,10 @@ public class HorseGame extends PApplet {
 	 */
 	private boolean questionAnswered(Expression q) {
 		int input = -100;				// placeholder value
-		if(!(textBox.isEmpty())) {
+		if(!(textBox.isEmpty()) && textBox.Text.length() < 4) {
 			input = Integer.parseInt(textBox.Text);
 		}
-		if(q.isSolution(input)) {
+		if(key == ENTER && q.isSolution(input)) {
 			return true;
 		} else return false;
 	}
@@ -319,6 +320,8 @@ public class HorseGame extends PApplet {
 		case GAMEOVER:
 			// restart button
 			if (mouseX > restartX && mouseX < restartX + butW && mouseY > startY && mouseY < restartY + butH) {
+				score = 0;
+				playerX = PLAYER_X;
 				currentState = GameState.RUNNING;
 			}
 			// credits button
