@@ -1,5 +1,6 @@
 package horsegame;
 
+
 import java.util.*;
 
 public class Expression {
@@ -10,7 +11,7 @@ public class Expression {
 		Random rng = new Random();
 		
 		op1 = rng.nextInt(11);
-		int temp = rng.nextInt(1);
+		int temp = rng.nextInt(2);
 		
 		if (temp == 0) {
 			operator = '-';
