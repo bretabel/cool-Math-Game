@@ -23,6 +23,9 @@ public class HorseGame extends PApplet {
 	PImage restartButton;
 	PImage menuButton;
 	PImage player;
+	PImage ground;
+	PImage hills;
+	PImage mountains;
 	PImage[] sprites = new PImage[8];
 	int animationFrame = 1;
 
@@ -33,12 +36,18 @@ public class HorseGame extends PApplet {
 	int credX, credY; 		// credits button
 	int restartX, restartY; // restart button
 	int menuX, menuY; 		// menu button
+	final int PLAYER_X = 100;
 	int playerX, playerY; 	// player sprite
 	int scoreX, scoreY;		// score
+	int bgx1 = 0;
+	int bgx2 = 0;
+	int bgx3 = 0;
 
 	// Dimensions
 	int boxW, boxH; 		// text box width and height
 	int butW, butH; 		// button width and height
+	
+	
 
 	// Game State
 	enum GameState {
@@ -58,6 +67,7 @@ public class HorseGame extends PApplet {
 	 */
 	public void setup() {
 		// fonts
+		frameRate(90);
 
 		// Initialize Game State
 		currentState = GameState.MENU;
@@ -77,6 +87,9 @@ public class HorseGame extends PApplet {
 		menuButton.resize(300, 0);
 		player = loadImage("Frame1.png");
 		player.resize(200, 0);
+		ground = loadImage("Ground.png");
+		hills = loadImage("Hills.png");
+		mountains = loadImage("Mountains.png");
 		sprites[0] = loadImage("Frame1.png");
 		sprites[1] = loadImage("Frame2.png");
 		sprites[2] = loadImage("Frame3.png");
@@ -88,7 +101,7 @@ public class HorseGame extends PApplet {
 		for (int i = 0; i < sprites.length; i++) {
 			sprites[i].resize(200, 0);
 		}
-		startMenuBG = loadImage("MainMenu_BG.png"); 
+		startMenuBG = loadImage("MainMenu_BG.png");
 		startMenuBG.resize(1125,  650);
 		gameOverBG = loadImage("GameOverMenu_BG.png");
 		gameOverBG.resize(1125, 650);
@@ -122,8 +135,8 @@ public class HorseGame extends PApplet {
 		scoreY = height - 75;
 
 		// player coordinates
-		playerX = 100;
-		playerY = 430;
+		playerX = PLAYER_X;
+		playerY = 450;
 
 	}
 
@@ -192,6 +205,9 @@ public class HorseGame extends PApplet {
 		}
 		clear();
 		background(gameBG);
+		drawMountains();
+		drawHills();
+		drawGround();
 		drawPlayer();
 		drawTextBox();
 		drawQuestions();
@@ -231,6 +247,7 @@ public class HorseGame extends PApplet {
 		text("Kyle", width / 2, height / 2 - 50);
 		text("Ellis", width / 2, height / 2 );
 		text("Darian", width / 2, height / 2 + 50);
+		text("Dominic", width / 2, height / 2 + 100);
 	}
 
 	/**
@@ -239,6 +256,33 @@ public class HorseGame extends PApplet {
 	private void drawPlayer() {
 		imageMode(CENTER);
 		image(sprites[animationFrame], playerX, playerY);
+	}
+	
+	private void drawMountains() {
+		image(mountains, bgx1/2, 250);
+		image(mountains, bgx1/2 + mountains.width, 250);
+		bgx1--;
+		if (bgx1/2 < -mountains.width) {
+			bgx1 = 0;
+		}
+	}
+	
+	private void drawHills() {
+		image(hills, bgx2, 350);
+		image(hills, bgx2 + hills.width, 350);
+		bgx2--;
+		if (bgx2 < -hills.width) {
+			bgx2 = 0;
+		}
+	}
+	
+	private void drawGround() {
+		image(ground, bgx3*3, 470);
+		image(ground, bgx3*3 + ground.width, 470);
+		bgx3--;
+		if (bgx3*3 < -ground.width) {
+			bgx3 = 0;
+		}
 	}
 
 	private void drawScore() {
@@ -285,10 +329,10 @@ public class HorseGame extends PApplet {
 	 */
 	private boolean questionAnswered(Expression q) {
 		int input = -100;				// placeholder value
-		if(!(textBox.isEmpty())) {
+		if(!(textBox.isEmpty()) && textBox.Text.length() < 4) {
 			input = Integer.parseInt(textBox.Text);
 		}
-		if(q.isSolution(input)) {
+		if(key == ENTER && q.isSolution(input)) {
 			return true;
 		} else return false;
 	}
@@ -312,7 +356,7 @@ public class HorseGame extends PApplet {
 			}
 			// credits button
 			else if (mouseX > credX && mouseX < credX + butW && mouseY > credY && mouseY < credY + butH) {
-				currentState = GameState.CREDITS; 
+				currentState = GameState.CREDITS;
 			}
 			// exit button
 			else if (mouseX > exitX && mouseX < exitX + butW && mouseY > exitY && mouseY < exitY + butH) {
@@ -327,6 +371,8 @@ public class HorseGame extends PApplet {
 		case GAMEOVER:
 			// restart button
 			if (mouseX > restartX && mouseX < restartX + butW && mouseY > startY && mouseY < restartY + butH) {
+				score = 0;
+				playerX = PLAYER_X;
 				currentState = GameState.RUNNING;
 			}
 			// credits button
