@@ -1,27 +1,4 @@
-<<<<<<< Updated upstream
-/.DS_Store
-/Credits_BG.png
-/Credits_Button.png
-/Exit_Button.png
-/Frame1.png
-/Frame2.png
-/Frame3.png
-/Frame4.png
-/Frame5.png
-/Frame6.png
-/Frame7.png
-/Frame8.png
-/GameOverMenu_BG.png
-/Game_Background.png
-/Horse.png
-/MainMenu_BG.png
-/MainMenu_Button.png
-/StartOver_Button.png
-/Start_Button.png
 /horsegame/
-=======
-/horsegame/
-/Credits_BG.png
-/GameOverMenu_BG.png
-/MainMenu_BG.png
->>>>>>> Stashed changes
+/Ground.png
+/Hills.png
+/Mountains.png
