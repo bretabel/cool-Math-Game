@@ -98,7 +98,6 @@ public class HorseGame extends PApplet {
 		// Assets
 		questions = new ProblemSet();
 		score = 0;
-
 		// Text Box
 		boxW = width / 2;
 		boxH = 50;
@@ -141,6 +140,7 @@ public class HorseGame extends PApplet {
 	 */
 	public void draw() {
 		switch (currentState) {
+		
 
 		case MENU:
 			drawMenu();
@@ -158,6 +158,7 @@ public class HorseGame extends PApplet {
 
 		case GAMEOVER:
 			drawGameOver();
+			
 			break;
 
 		case CREDITS:
