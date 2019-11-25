@@ -292,6 +292,7 @@ public class HorseGame extends PApplet {
 			score++;
 			playerX += width/ (MAX_SCORE + 2);		// moves the player sprite across the screen
 			questions.problemList.remove(0);
+			textBox.clear();
 		}
 		else {
 			missed++;
@@ -474,6 +475,10 @@ public class HorseGame extends PApplet {
 			}
 
 			return false;
+		}
+		
+		private void clear() {
+			this.Text = "";
 		}
 
 		private void addText(char text) {
