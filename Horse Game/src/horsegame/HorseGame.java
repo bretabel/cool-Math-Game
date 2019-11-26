@@ -23,6 +23,9 @@ public class HorseGame extends PApplet {
 	PImage restartButton;
 	PImage menuButton;
 	PImage player;
+	PImage ground;
+	PImage hills;
+	PImage mountains;
 	PImage[] sprites = new PImage[8];
 	int animationFrame = 1;
 
@@ -36,11 +39,16 @@ public class HorseGame extends PApplet {
 	final int PLAYER_X = 100;
 	int playerX, playerY; 	// player sprite
 	int scoreX, scoreY;		// score
+	int bgx1 = 0;
+	int bgx2 = 0;
+	int bgx3 = 0;
 	int timerX, timerY;		// timer
 
 	// Dimensions
 	int boxW, boxH; 		// text box width and height
 	int butW, butH; 		// button width and height
+
+
 
 	// Game State
 	enum GameState {
@@ -64,6 +72,7 @@ public class HorseGame extends PApplet {
 	 */
 	public void setup() {
 		// fonts
+		frameRate(90);
 
 		// Initialize Game State
 		currentState = GameState.MENU;
@@ -83,6 +92,9 @@ public class HorseGame extends PApplet {
 		menuButton.resize(300, 0);
 		player = loadImage("Frame1.png");
 		player.resize(200, 0);
+		ground = loadImage("Ground.png");
+		hills = loadImage("Hills.png");
+		mountains = loadImage("Mountains.png");
 		sprites[0] = loadImage("Frame1.png");
 		sprites[1] = loadImage("Frame2.png");
 		sprites[2] = loadImage("Frame3.png");
@@ -105,7 +117,7 @@ public class HorseGame extends PApplet {
 		questions = new ProblemSet();
 		score = 0;
 		startTime = 0;		// timer gets initialized each time game starts
-		timer = 0;	
+		timer = 0;
 		stopTime = 0;
 		missed = 0;
 
@@ -159,7 +171,7 @@ public class HorseGame extends PApplet {
 			break;
 
 		case RUNNING:
-			
+
 			timer = (millis() - startTime) / 1000;
 			if (frameCount % 6 == 0) {
 				animationFrame++;
@@ -204,6 +216,9 @@ public class HorseGame extends PApplet {
 		}
 		clear();
 		background(gameBG);
+		drawMountains();
+		drawHills();
+		drawGround();
 		drawPlayer();
 		drawTextBox();
 		drawQuestions();
@@ -211,7 +226,7 @@ public class HorseGame extends PApplet {
 		drawTimer();
 
 	}
-	
+
 	/**
 	 * Method to draw the Game Over window.
 	 */
@@ -255,12 +270,39 @@ public class HorseGame extends PApplet {
 		image(sprites[animationFrame], playerX, playerY);
 	}
 
+	private void drawMountains() {
+		image(mountains, bgx1/2, 250);
+		image(mountains, bgx1/2 + mountains.width, 250);
+		bgx1--;
+		if (bgx1/2 < -mountains.width) {
+			bgx1 = 0;
+		}
+	}
+
+	private void drawHills() {
+		image(hills, bgx2, 350);
+		image(hills, bgx2 + hills.width, 350);
+		bgx2--;
+		if (bgx2 < -hills.width) {
+			bgx2 = 0;
+		}
+	}
+
+	private void drawGround() {
+		image(ground, bgx3*3, 470);
+		image(ground, bgx3*3 + ground.width, 470);
+		bgx3--;
+		if (bgx3*3 < -ground.width) {
+			bgx3 = 0;
+		}
+	}
+
 	private void drawScore() {
 		textAlign(CENTER, CENTER);
 		fill(255, 255, 255); // white
 		text(("Score:\n" + score), scoreX, scoreY);
 	}
-	
+
 	/**
 	 * Method to draw the timer
 	 */
@@ -476,7 +518,7 @@ public class HorseGame extends PApplet {
 
 			return false;
 		}
-		
+
 		private void clear() {
 			this.Text = "";
 		}
