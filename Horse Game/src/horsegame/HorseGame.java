@@ -42,6 +42,7 @@ public class HorseGame extends PApplet {
 	int bgx1 = 0;
 	int bgx2 = 0;
 	int bgx3 = 0;
+	int endX;
 	int timerX, timerY;		// timer
 
 	// Dimensions
