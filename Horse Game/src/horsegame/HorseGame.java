@@ -37,11 +37,12 @@ public class HorseGame extends PApplet {
 	int restartX, restartY; // restart button
 	int menuX, menuY; 		// menu button
 	final int PLAYER_X = 100;
-	int playerX, playerY; 	// player sprite
+	int playerX, playerY;	// player sprite
 	int scoreX, scoreY;		// score
 	int bgx1 = 0;
 	int bgx2 = 0;
 	int bgx3 = 0;
+	int endX;
 
 	// Dimensions
 	int boxW, boxH; 		// text box width and height
@@ -66,7 +67,7 @@ public class HorseGame extends PApplet {
 	 * Initialize Variables
 	 */
 	public void setup() {
-		// fonts
+		
 		frameRate(90);
 
 		// Initialize Game State
@@ -137,8 +138,8 @@ public class HorseGame extends PApplet {
 
 		// player coordinates
 		playerX = PLAYER_X;
-		playerY = 450;
-
+		playerY = 440;
+		endX = 100;
 	}
 
 	public void settings() {
@@ -211,7 +212,6 @@ public class HorseGame extends PApplet {
 		drawTextBox();
 		drawQuestions();
 		drawScore();
-
 	}
 
 	/**
@@ -230,6 +230,7 @@ public class HorseGame extends PApplet {
 		text("Game Over!", width / 2, height / 2 - 200);
 		textSize(32);
 		text("Your Score: " + score, width / 2, height / 2 - 150);
+		endX = 100;
 	}
 
 	private void drawCredits() {
@@ -255,6 +256,11 @@ public class HorseGame extends PApplet {
 	private void drawPlayer() {
 		imageMode(CENTER);
 		image(sprites[animationFrame], playerX, playerY);
+		playerX++;
+		if (playerX >= endX) {
+			playerX = endX;
+			frameRate(90);
+		}
 	}
 	
 	private void drawMountains() {
@@ -283,6 +289,10 @@ public class HorseGame extends PApplet {
 			bgx3 = 0;
 		}
 	}
+	
+	private void drawMoveForward() {
+		// TODO
+	}
 
 	private void drawScore() {
 		textAlign(CENTER, CENTER);
@@ -310,7 +320,9 @@ public class HorseGame extends PApplet {
 		text(qString, boxX, boxY - 20);
 		if (questionAnswered(q)) {
 			score++;
-			playerX += width/ (MAX_SCORE + 2);		// moves the player sprite across the screen
+			endX = playerX + width/ (MAX_SCORE + 2);
+			frameRate(140);
+			//playerX += width/ (MAX_SCORE + 2);		// moves the player sprite across the screen
 			questions.problemList.remove(0);
 		}
 
