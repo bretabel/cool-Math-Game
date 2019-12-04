@@ -37,17 +37,19 @@ public class HorseGame extends PApplet {
 	int restartX, restartY; // restart button
 	int menuX, menuY; 		// menu button
 	final int PLAYER_X = 100;
-	int playerX, playerY; 	// player sprite
+	int playerX, playerY;	// player sprite
 	int scoreX, scoreY;		// score
 	int bgx1 = 0;
 	int bgx2 = 0;
 	int bgx3 = 0;
+	int endX;
+	int timerX, timerY;		// timer
 
 	// Dimensions
 	int boxW, boxH; 		// text box width and height
 	int butW, butH; 		// button width and height
-	
-	
+
+
 
 	// Game State
 	enum GameState {
@@ -61,12 +63,16 @@ public class HorseGame extends PApplet {
 	TextBox textBox;
 	int score;
 	final int MAX_SCORE = 10;
+	int startTime;
+	int timer;
+	int stopTime;
+	int missed; 	//failed attempts to answer questions
 
 	/**
 	 * Initialize Variables
 	 */
 	public void setup() {
-		// fonts
+
 		frameRate(90);
 
 		// Initialize Game State
@@ -111,6 +117,10 @@ public class HorseGame extends PApplet {
 		// Assets
 		questions = new ProblemSet();
 		score = 0;
+		startTime = 0;		// timer gets initialized each time game starts
+		timer = 0;
+		stopTime = 0;
+		missed = 0;
 
 		// Text Box
 		boxW = width / 2;
@@ -134,11 +144,13 @@ public class HorseGame extends PApplet {
 		exitY = height / 2 + 120;
 		scoreX = 125;
 		scoreY = height - 75;
+		timerX = width - 125;
+		timerY = height - 75;
 
 		// player coordinates
 		playerX = PLAYER_X;
-		playerY = 450;
-
+		playerY = 440;
+		endX = 100;
 	}
 
 	public void settings() {
@@ -160,8 +172,8 @@ public class HorseGame extends PApplet {
 			break;
 
 		case RUNNING:
-			int startTime = millis();
-			int timer = (millis() - startTime) / 1000;
+
+			timer = (millis() - startTime) / 1000;
 			if (frameCount % 6 == 0) {
 				animationFrame++;
 				animationFrame = animationFrame % sprites.length;
@@ -200,6 +212,7 @@ public class HorseGame extends PApplet {
 	 */
 	private void drawRunning() {
 		if (score == MAX_SCORE) {
+			stopTime = timer;
 			currentState = GameState.GAMEOVER;
 		}
 		clear();
@@ -211,6 +224,7 @@ public class HorseGame extends PApplet {
 		drawTextBox();
 		drawQuestions();
 		drawScore();
+		drawTimer();
 
 	}
 
@@ -230,6 +244,7 @@ public class HorseGame extends PApplet {
 		text("Game Over!", width / 2, height / 2 - 200);
 		textSize(32);
 		text("Your Score: " + score, width / 2, height / 2 - 150);
+		endX = 100;
 	}
 
 	private void drawCredits() {
@@ -255,8 +270,13 @@ public class HorseGame extends PApplet {
 	private void drawPlayer() {
 		imageMode(CENTER);
 		image(sprites[animationFrame], playerX, playerY);
+		playerX++;
+		if (playerX >= endX) {
+			playerX = endX;
+			frameRate(90);
+		}
 	}
-	
+
 	private void drawMountains() {
 		image(mountains, bgx1/2, 250);
 		image(mountains, bgx1/2 + mountains.width, 250);
@@ -265,7 +285,7 @@ public class HorseGame extends PApplet {
 			bgx1 = 0;
 		}
 	}
-	
+
 	private void drawHills() {
 		image(hills, bgx2, 350);
 		image(hills, bgx2 + hills.width, 350);
@@ -274,7 +294,7 @@ public class HorseGame extends PApplet {
 			bgx2 = 0;
 		}
 	}
-	
+
 	private void drawGround() {
 		image(ground, bgx3*3, 470);
 		image(ground, bgx3*3 + ground.width, 470);
@@ -284,10 +304,23 @@ public class HorseGame extends PApplet {
 		}
 	}
 
+	private void drawMoveForward() {
+		// TODO
+	}
+
 	private void drawScore() {
 		textAlign(CENTER, CENTER);
 		fill(255, 255, 255); // white
 		text(("Score:\n" + score), scoreX, scoreY);
+	}
+
+	/**
+	 * Method to draw the timer
+	 */
+	private void drawTimer() {
+		textAlign(CENTER, CENTER);
+		fill(255, 255, 255); // white
+		text("Timer:\n" + timer, timerX, timerY);
 	}
 
 	private void drawTextBox() {
@@ -310,8 +343,14 @@ public class HorseGame extends PApplet {
 		text(qString, boxX, boxY - 20);
 		if (questionAnswered(q)) {
 			score++;
-			playerX += width/ (MAX_SCORE + 2);		// moves the player sprite across the screen
+			endX = playerX + width/ (MAX_SCORE + 2);
+			frameRate(140);
+			//playerX += width/ (MAX_SCORE + 2);		// moves the player sprite across the screen
 			questions.problemList.remove(0);
+			textBox.clear();
+		}
+		else {
+			missed++;
 		}
 
 	}
@@ -351,6 +390,9 @@ public class HorseGame extends PApplet {
 		case MENU:
 			// start buttons
 			if (mouseX > startX && mouseX < startX + butW && mouseY > startY && mouseY < startY + butH) {
+				startTime = millis();
+				missed = 0;
+				score = 0;
 				currentState = GameState.RUNNING;
 			}
 			// credits button
@@ -371,7 +413,9 @@ public class HorseGame extends PApplet {
 			// restart button
 			if (mouseX > restartX && mouseX < restartX + butW && mouseY > startY && mouseY < restartY + butH) {
 				score = 0;
+				startTime = millis();
 				playerX = PLAYER_X;
+				missed = 0;
 				currentState = GameState.RUNNING;
 			}
 			// credits button
@@ -486,6 +530,10 @@ public class HorseGame extends PApplet {
 			}
 
 			return false;
+		}
+
+		private void clear() {
+			this.Text = "";
 		}
 
 		private void addText(char text) {
