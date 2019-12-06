@@ -87,6 +87,11 @@ public class Login extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		String usr = txtUsername.getText();
+		String pw = pwdPassword.getText();
+		
+
+		
 		System.out.print("This button has been clicked");
 		setVisible(false);
 		PApplet.main(new String[] { horsegame.HorseGame.class.getName() });
