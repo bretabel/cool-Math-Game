@@ -87,12 +87,12 @@ public class Login extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.print("This button has been clicked");
+		System.out.print("This button has been clicked ");
 		// TODO Auto-generated method stub
 		String usr = txtUsername.getText();
 		@SuppressWarnings("deprecation")
 		String pw = pwdPassword.getText();
-		System.out.print("Pass");
+		System.out.print("Pass ");
 		int status = Logic.isValid(usr, pw);
 		System.out.print("Logic");
 		

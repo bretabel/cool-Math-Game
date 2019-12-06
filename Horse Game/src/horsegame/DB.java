@@ -10,9 +10,9 @@ public class DB {
 	private String driver;
 	private Connection conn;
 	public DB() {
-		url = "jdbc:mysql://localhost:3306/";
-		dbName = "HorseGameDB";
-		dbPassword = "";
+		url = "jdbc:mysql://localhost:8080/HorseGameDB";
+		dbName = "admin";
+		dbPassword = "HorseGame123";
 		driver = "com.mysql.cj.jdbc.Driver";
 		connectDB();
 	}
@@ -21,9 +21,9 @@ public class DB {
 		try{
 			Class.forName(driver);
 			//conn = DriverManager.getConnection(url,dbName, dbPassword);
-			//conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/HorseGameDB?user=root&password=");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/HorseGameDB?user=admin&password=HorseGame123");
 			//conn = DriverManager.getConnection(url);
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/HorseGameDB", "root", "");
+			//conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/HorseGameDB", "admin", "HorseGame123");
 			System.out.print("Please Work");
 		}catch(Exception e){
 			System.out.println(e);			
