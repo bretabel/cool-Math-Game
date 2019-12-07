@@ -311,7 +311,7 @@ public class HorseGame extends PApplet {
 	private void drawScore() {
 		textAlign(CENTER, CENTER);
 		fill(255, 255, 255); // white
-		text(("Score:\n" + score), scoreX, scoreY);
+		text(("Missed:\n" + missed), scoreX, scoreY);
 	}
 
 	/**
@@ -341,7 +341,7 @@ public class HorseGame extends PApplet {
 		String qString = q.toString();
 		fill(140);									// same shade of grey as the text box
 		text(qString, boxX, boxY - 20);
-		if (questionAnswered(q)) {
+		if (questionAnswered(q) == 1) {
 			score++;
 			endX = playerX + width/ (MAX_SCORE + 2);
 			frameRate(140);
@@ -349,10 +349,10 @@ public class HorseGame extends PApplet {
 			questions.problemList.remove(0);
 			textBox.clear();
 		}
-		else {
+		else if (questionAnswered(q) == 0) {
+			textBox.clear();
 			missed++;
 		}
-
 	}
 
 
@@ -363,16 +363,22 @@ public class HorseGame extends PApplet {
 	/**
 	 * A method to check the player's answer against the solution
 	 * @param q The question
-	 * @return True if correct, otherwise false
+	 * @return 1 if correct, 0 if incorrect, -1 if enter not pressed
 	 */
-	private boolean questionAnswered(Expression q) {
+	private int questionAnswered(Expression q) {
 		int input = -100;				// placeholder value
-		if(!(textBox.isEmpty()) && textBox.Text.length() < 4) {
-			input = Integer.parseInt(textBox.Text);
+		if(!(textBox.isEmpty())){
+			if(textBox.Text.length() < 4) {
+				input = Integer.parseInt(textBox.Text);
+			}
+			if(keyCode == ENTER) {
+				if(q.isSolution(input)) {
+					return 1;
+				}
+				return 0;
+			}
 		}
-		if(key == ENTER && q.isSolution(input)) {
-			return true;
-		} else return false;
+		return -1;
 	}
 
 	/**
@@ -513,7 +519,7 @@ public class HorseGame extends PApplet {
 		 */
 		boolean keyPressed(char KEY, int KEYCODE) {
 			if (selected) {
-				if (KEYCODE == (int) BACKSPACE) {
+				if (KEYCODE == (int) BACKSPACE && TextLength > 0) {
 					BACKSPACE();
 				} else if (KEYCODE == (int) ENTER) {
 					return true;
@@ -534,6 +540,7 @@ public class HorseGame extends PApplet {
 
 		private void clear() {
 			this.Text = "";
+			this.TextLength = 0;
 		}
 
 		private void addText(char text) {
