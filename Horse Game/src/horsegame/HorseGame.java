@@ -1,13 +1,12 @@
 package horsegame;
 
+import javafx.scene.paint.Color;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PFont;
 
 public class HorseGame extends PApplet {
-
-	// Instance Variables
-	// TODO: Fill in variables as needed
+	private static final int FAST = 140;
 
 	// Fonts
 	PFont menufont;
@@ -28,7 +27,7 @@ public class HorseGame extends PApplet {
 	PImage mountains;
 	PImage[] sprites = new PImage[8];
 	int animationFrame = 1;
-
+	
 	// Coordinates
 	int boxX, boxY; 		// text box for questions
 	int startX, startY; 	// start button
@@ -44,6 +43,7 @@ public class HorseGame extends PApplet {
 	int bgx3 = 0;
 	int endX;
 	int timerX, timerY;		// timer
+	
 
 	// Dimensions
 	int boxW, boxH; 		// text box width and height
@@ -67,6 +67,7 @@ public class HorseGame extends PApplet {
 	int timer;
 	int stopTime;
 	int missed; 	//failed attempts to answer questions
+	
 
 	/**
 	 * Initialize Variables
@@ -304,10 +305,6 @@ public class HorseGame extends PApplet {
 		}
 	}
 
-	private void drawMoveForward() {
-		// TODO
-	}
-
 	private void drawScore() {
 		textAlign(CENTER, CENTER);
 		fill(255, 255, 255); // white
@@ -344,7 +341,7 @@ public class HorseGame extends PApplet {
 		if (questionAnswered(q)) {
 			score++;
 			endX = playerX + width/ (MAX_SCORE + 2);
-			frameRate(140);
+			frameRate(FAST);
 			//playerX += width/ (MAX_SCORE + 2);		// moves the player sprite across the screen
 			questions.problemList.remove(0);
 			textBox.clear();
@@ -372,7 +369,9 @@ public class HorseGame extends PApplet {
 		}
 		if(key == ENTER && q.isSolution(input)) {
 			return true;
-		} else return false;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -460,6 +459,7 @@ public class HorseGame extends PApplet {
 		public int Foreground = color(0, 0, 0);
 		public int BackgroundSelected = color(160, 160, 160);
 		public int Border = color(30, 30, 30);
+		public int missColor = color(220, 20, 60);
 
 		public boolean BorderEnable = false;
 		public int BorderWeight = 1;
@@ -481,6 +481,7 @@ public class HorseGame extends PApplet {
 		}
 
 		void draw() {
+			
 			// DRAWING THE BACKGROUND
 			if (selected) {
 				fill(BackgroundSelected);
@@ -558,7 +559,6 @@ public class HorseGame extends PApplet {
 					return true;
 				}
 			}
-
 			return false;
 		}
 
