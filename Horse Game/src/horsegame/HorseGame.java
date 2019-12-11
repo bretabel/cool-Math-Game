@@ -342,7 +342,6 @@ public class HorseGame extends PApplet {
 			score++;
 			endX = playerX + width/ (MAX_SCORE + 2);
 			frameRate(FAST);
-			//playerX += width/ (MAX_SCORE + 2);		// moves the player sprite across the screen
 			questions.problemList.remove(0);
 			textBox.clear();
 		}
@@ -485,7 +484,6 @@ public class HorseGame extends PApplet {
 		}
 
 		void draw() {
-
 			// DRAWING THE BACKGROUND
 			if (selected) {
 				fill(BackgroundSelected);
@@ -533,7 +531,6 @@ public class HorseGame extends PApplet {
 					}
 				}
 			}
-
 			return false;
 		}
 
