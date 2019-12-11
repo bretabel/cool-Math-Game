@@ -1,3 +1,5 @@
+package horsegame;
+
 import java.util.*;
 
 public class Expression {
@@ -65,7 +67,7 @@ public class Expression {
 		} else if (operator == '-'){
 			return op1 - op2;
 		} else {
-			int arrayPlace;
+			int arrayPlace = 0;
 			String strOP = Integer.toString(op1);
 			String strOP2 = Integer.toString(op2);
 			String[] nums = strOP.split("");
