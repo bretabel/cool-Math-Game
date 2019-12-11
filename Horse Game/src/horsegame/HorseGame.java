@@ -17,6 +17,7 @@ public class HorseGame extends PApplet {
 	PImage startMenuBG;
 	PImage gameOverBG;
 	PImage creditsBG;
+	PImage backButton;
 	PImage exitButton;
 	PImage creditsButton;
 	PImage startButton;
@@ -67,6 +68,8 @@ public class HorseGame extends PApplet {
 	int timer;
 	int stopTime;
 	int missed; 	//failed attempts to answer questions
+	double accuracy;
+	double avg;
 
 	/**
 	 * Initialize Variables
@@ -81,6 +84,8 @@ public class HorseGame extends PApplet {
 		// Images
 		gameBG = loadImage("Game_Background.png");
 		gameBG.resize(1125, 650);
+		backButton = loadImage("Back_Button.png");
+		backButton.resize(75, 75);
 		exitButton = loadImage("Exit_Button.png");
 		exitButton.resize(300, 0);
 		creditsButton = loadImage("Credits_Button.png");
@@ -232,6 +237,8 @@ public class HorseGame extends PApplet {
 	 * Method to draw the Game Over window.
 	 */
 	private void drawGameOver() {
+		accuracy = (10/((double)missed+10))*100;
+		avg = ((double)stopTime/10);
 		clear();
 		background(gameOverBG);
 		imageMode(CORNER);
@@ -241,15 +248,19 @@ public class HorseGame extends PApplet {
 		textAlign(CENTER, CENTER);
 		textSize(45);
 		fill(255, 255, 255); // white
-		text("Game Over!", width / 2, height / 2 - 200);
+		text("Game Over!", width / 2, height / 2 - 250);
 		textSize(32);
-		text("Your Score: " + score, width / 2, height / 2 - 150);
+		text("You answered " + score + " questions in " + stopTime + " seconds with " + missed + " misses!", width / 2, height / 2 - 200);
+		textSize(24);
+		text("Your answers were " + ((int)(100*accuracy)/100) +"% accurate and you spent an average of "+ avg +" seconds on each question!", width / 2, height / 2 - 150);
 		endX = 100;
 	}
 
 	private void drawCredits() {
 		clear();
 		background(creditsBG);
+
+		image(backButton, 0, 0);
 
 		textAlign(CENTER, CENTER);
 		textSize(45);
@@ -436,6 +447,9 @@ public class HorseGame extends PApplet {
 			break;
 
 		case CREDITS:
+			if (mouseX > 0 && mouseX < 0 + 75 && mouseY > 0 && mouseY < 0 + 75) {
+				currentState = GameState.MENU;
+			}
 			break;
 		}
 	}
