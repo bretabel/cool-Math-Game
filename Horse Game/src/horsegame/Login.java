@@ -11,6 +11,7 @@ import processing.core.PApplet;
 
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
@@ -86,10 +87,23 @@ public class Login extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.print("This button has been clicked ");
 		// TODO Auto-generated method stub
-		System.out.print("This button has been clicked");
-		setVisible(false);
-		PApplet.main(new String[] { horsegame.HorseGame.class.getName() });
+		String usr = txtUsername.getText();
+		@SuppressWarnings("deprecation")
+		String pw = pwdPassword.getText();
+		System.out.print("Pass ");
+		int status = Logic.isValid(usr, pw);
+		System.out.print("Logic");
+		
+		if(status == 1) {
+			contentPane.setVisible(false);
+			dispose();
+			PApplet.main(new String[] { horsegame.HorseGame.class.getName() });
+		}else {
+			System.out.println("Hello2");
+			JOptionPane.showMessageDialog(contentPane, "Can not login");
+		}
 		}
 		
 	}

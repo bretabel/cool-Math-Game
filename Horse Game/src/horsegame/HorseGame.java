@@ -171,6 +171,7 @@ public class HorseGame extends PApplet {
 	 */
 	public void draw() {
 		switch (currentState) {
+		
 
 		case MENU:
 			drawMenu();
@@ -188,6 +189,7 @@ public class HorseGame extends PApplet {
 
 		case GAMEOVER:
 			drawGameOver();
+			
 			break;
 
 		case CREDITS:
